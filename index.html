@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shrutik Annadate | Technical Product Manager</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+<style>
+:root{
+    --bg:#ffffff;
+    --soft:#f8fafc;
+    --text:#0f172a;
+    --muted:#64748b;
+    --accent:#2563eb;
+    --purple:#8b5cf6;
+    --border:#e2e8f0;
+    --shadow:0 20px 50px rgba(0,0,0,.05);
+    --grad:linear-gradient(135deg,var(--accent),var(--purple));
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+    font-family:'Inter',sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.7;
+    overflow-x: hidden;
+}
+
+.container{max-width:1140px;margin:auto;padding:0 2rem}
+
+/* NAV */
+nav{
+    position:sticky;
+    top:0;
+    background:rgba(255,255,255,.8);
+    backdrop-filter:blur(20px);
+    border-bottom:1px solid var(--border);
+    z-index:1000;
+}
+.nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:1rem 0;
+}
+.nav a{
+    margin-left:2rem;
+    text-decoration:none;
+    color:var(--muted);
+    font-weight:600;
+    font-size:.9rem;
+}
+.nav a:hover{color:var(--accent)}
+.logo{font-weight:900;color:var(--text) !important; margin-left: 0 !important;}
+
+/* HERO SECTION - Reduced top padding */
+header {
+    background: radial-gradient(circle at top right, #f8fafc, #ffffff);
+    padding: 4rem 0 8rem; 
+}
+
+.hero-flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6rem;
+}
+
+.hero-content { flex: 1.2; }
+
+/* Profile Image */
+.hero-image { flex: 0.8; display: flex; justify-content: center; position: relative; }
+.image-wrapper { position: relative; width: 340px; height: 340px; z-index: 1; }
+.image-wrapper::before {
+    content: ''; position: absolute; top: -12px; right: -12px;
+    width: 100%; height: 100%; border: 2.5px solid var(--accent);
+    border-radius: 40px; z-index: -1;
+}
+.image-wrapper img {
+    width: 100%; height: 100%; object-fit: cover;
+    border-radius: 32px; box-shadow: var(--shadow); border: 4px solid #fff;
+}
+
+.badges{ display:flex; gap:.75rem; flex-wrap:wrap; margin-bottom:1.5rem; }
+.badge{
+    display:flex; align-items:center; gap:8px; padding:6px 14px;
+    border-radius:100px; border:1px solid var(--border);
+    background:#fff; font-size:.8rem; font-weight: 600;
+}
+.badge i{color:var(--accent)}
+
+/* HIGHLIGHTED HERO TEXT */
+h1{
+    font-size:clamp(2.5rem, 5vw, 3.8rem);
+    font-weight:900;
+    line-height:1.1;
+    letter-spacing:-0.03em;
+}
+.grad{
+    background:var(--grad);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.hero-content p{
+    color:var(--muted);
+    margin-top:1.5rem;
+    font-size:1.15rem;
+    max-width: 620px;
+}
+
+.cta{
+    display:inline-flex; align-items:center; gap:10px; margin-top:2.5rem;
+    padding:1rem 2.5rem; background:var(--grad); color:#fff;
+    border-radius:14px; text-decoration:none; font-weight:700;
+    transition: 0.3s;
+}
+
+/* SECTION SPACING */
+section { padding: 8rem 0; }
+
+.center{text-align:center;margin-bottom:4rem}
+.center span{
+    font-size:.75rem; letter-spacing:.25em; font-weight:800;
+    color:var(--accent); text-transform: uppercase;
+}
+.center h2{ font-size:2.8rem; font-weight:900; margin:.8rem 0; }
+
+/* GRID & TABS */
+.tabs{ display:flex; justify-content:center; gap:.8rem; margin-bottom:3.5rem; }
+.tab{
+    padding:10px 22px; border-radius:100px; border:1px solid var(--border);
+    background:#fff; font-weight:600; cursor:pointer; color:var(--muted);
+}
+.tab.active{ background:var(--text); color:#fff; border-color:var(--text); }
+
+.grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:2.5rem; }
+.case{
+    background:#fff; border:1px solid var(--border); border-radius:28px;
+    overflow:hidden; display:none; transition: 0.3s;
+}
+.case.active{display:block}
+.case:hover{ transform:translateY(-10px); box-shadow:var(--shadow); border-color:var(--accent); }
+.case img{ width:100%; height:260px; object-fit:cover; }
+.case-body{padding:2rem}
+
+/* RESUME SECTION - Fixed Spacing */
+.resume-section {
+    padding-top: 10rem; /* Ensures gap from previous section */
+    padding-bottom: 8rem;
+}
+.resume{
+    background:#0f172a; padding:4.5rem; border-radius:40px;
+    display:flex; justify-content:space-between; align-items:center; color:#fff;
+}
+.resume h2 { font-size: 2.2rem; font-weight: 800; }
+.resume p{color:#94a3b8; margin-top: 8px; font-size: 1.1rem;}
+.resume a{
+    background:#fff; color:#0f172a; padding:16px 32px;
+    border-radius:14px; font-weight:700; text-decoration:none;
+}
+
+/* CONTACT */
+.contact-wrapper{ background:var(--soft); border-radius:50px; padding:6rem 3rem; text-align:center; }
+.social-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-top:3.5rem; }
+.social-item{
+    background:#fff; padding:2.5rem; border-radius:30px; border:1px solid var(--border);
+    text-decoration:none; color:var(--text); display:flex;
+    flex-direction:column; align-items:center; gap:1rem; font-weight: 700;
+}
+
+footer{ padding:4rem 0; text-align:center; border-top:1px solid var(--border); }
+
+@media(max-width:992px){
+    .hero-flex { flex-direction: column-reverse; text-align: center; }
+    .hero-content { display: flex; flex-direction: column; align-items: center; }
+    .image-wrapper { width: 280px; height: 280px; }
+}
+@media(max-width:768px){
+    .grid,.social-grid{grid-template-columns:1fr}
+    .resume { flex-direction: column; text-align: center; gap: 2.5rem; }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<div class="container nav">
+<a class="logo">SHRUTIK ANNADATE</a>
+<div>
+<a href="#work">Case Studies</a>
+<a href="#resume">Resume</a>
+<a href="#contact">Contact</a>
+</div>
+</div>
+</nav>
+
+<header>
+<div class="container hero-flex">
+    <div class="hero-content">
+    <div class="badges">
+        <div class="badge"><i class="fa-solid fa-graduation-cap"></i> IIT Kanpur MBA</div>
+        <div class="badge"><i class="fa-solid fa-code"></i> Ex-Full Stack Developer</div>
+        <div class="badge"><i class="fa-solid fa-bolt"></i> Product & Consulting</div>
+    </div>
+
+    <h1>
+        Right Problems <br>
+        <span class="grad">scalable Solutions</span>
+    </h1>
+
+    <p>
+        I am a <strong>Product Manager</strong> with a B.Tech in Computer Science and an MBA from 
+        <strong>IIT Kanpur</strong>. With a strong foundation in technology and business, I focus on 
+        breaking down ambiguous challenges, getting to the core problem, and designing 
+        user-centric solutions grounded in data and structured thinking. I thrive at the 
+        intersection of strategy and execution, turning complex systems into scalable outcomes 
+        that create real value for users and businesses.
+    </p>
+
+    <a href="#work" class="cta">
+        Explore My Work <i class="fa-solid fa-arrow-right"></i>
+    </a>
+    </div>
+
+    <div class="hero-image">
+        <div class="image-wrapper">
+            <img src="YOUR_IMAGE_URL_HERE" alt="Shrutik Annadate">
+        </div>
+    </div>
+</div>
+</header>
+
+<section id="work" class="container">
+<div class="center">
+<span>PORTFOLIO</span>
+<h2>Product Thinking</h2>
+<p>Structured problem solving across design, growth, and analytics.</p>
+</div>
+
+<div class="tabs">
+<button class="tab active" data-cat="design">Product Design</button>
+<button class="tab" data-cat="sense">Product Sense</button>
+<button class="tab" data-cat="guess">Guesstimates</button>
+</div>
+
+<div class="grid">
+    <div class="case active" data-cat="design">
+        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d">
+        <div class="case-body">
+            <span class="tag">Technical PM</span>
+            <h3>LMS Charges Integration</h3>
+            <p>Managed PayU gateway integration for 9M+ customers, optimizing digital payment workflows.</p>
+        </div>
+    </div>
+
+    <div class="case active" data-cat="design">
+        <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c">
+        <div class="case-body">
+            <span class="tag">UX / Growth</span>
+            <h3>Mandate Success Optimization</h3>
+            <p>Reduced E-Mandate failures to 1% by streamlining CAMS aggregator workflows.</p>
+        </div>
+    </div>
+
+    <div class="case" data-cat="sense">
+        <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3">
+        <div class="case-body">
+            <span class="tag">Strategy</span>
+            <h3>Quick Pay Growth</h3>
+            <p>Drove 25% growth in digital transaction frequency via workflow redesign.</p>
+        </div>
+    </div>
+    </div>
+</section>
+
+<section class="container" style="background: #fafafa; border-radius: 60px; padding: 6rem 2rem;">
+<div class="center">
+<span>EXPERIENCE BEYOND CODE</span>
+<h2>Impact & Leadership</h2>
+</div>
+<div class="grid">
+    <div class="case active">
+        <div class="case-body">
+            <span class="tag">Leadership</span>
+            <h3>Secretary, Product Club IITK</h3>
+            <p>Led ProdCamp 1.0 with 500+ participants and 6+ industry experts from top tech firms.</p>
+        </div>
+    </div>
+    <div class="case active">
+        <div class="case-body">
+            <span class="tag">Creator</span>
+            <h3>Educational Content @simpcoder</h3>
+            <p>Built a digital brand with 350K+ reach, simplifying complex tech concepts for learners.</p>
+        </div>
+    </div>
+</div>
+</section>
+
+<section id="resume" class="container resume-section">
+<div class="resume">
+<div>
+<h2>Proven PM Impact</h2>
+<p>View my full journey</p>
+</div>
+<a href="#"><i class="fa-solid fa-file-pdf"></i> Download Resume</a>
+</div>
+</section>
+
+<section id="contact" class="container">
+<div class="contact-wrapper">
+<div class="center">
+<span>GET IN TOUCH</span>
+<h2>Opportunities & Discussions</h2>
+<p>
+  If you have a product opportunity or case to discuss, I’d love to connect.
+</p>
+</div>
+<div class="social-grid">
+<a class="social-item" href="mailto:shrutikannadate03@gmail.com"><i class="fa-solid fa-envelope"></i>Email</a>
+<a class="social-item" href="https://linkedin.com/in/shrutik23"><i class="fa-brands fa-linkedin"></i>LinkedIn</a>
+<a class="social-item" href="https://instagram.com/simpcoder"><i class="fa-brands fa-instagram"></i>Instagram</a>
+</div>
+</div>
+</section>
+
+<footer>
+  <p id="copyright"></p>
+</footer>
+
+<script>
+const tabs=document.querySelectorAll('.tab');
+const cases=document.querySelectorAll('.case');
+
+tabs.forEach(tab=>{
+    tab.onclick=()=>{
+        tabs.forEach(t=>t.classList.remove('active'));
+        tab.classList.add('active');
+        const cat=tab.dataset.cat;
+        cases.forEach(c=>{
+            if(c.dataset.cat) {
+                c.style.display = (c.dataset.cat === cat) ? 'block' : 'none';
+            }
+        });
+    };
+});
+
+document.getElementById("copyright").innerText ="© " + new Date().getFullYear() + " Shrutik Annadate";
+
+</script>
+
+</body>
+</html>
