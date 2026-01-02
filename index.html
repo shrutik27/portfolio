@@ -9,307 +9,626 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 
 <style>
-:root{
-  --bg:#ffffff;
-  --soft:#f8fafc;
-  --text:#0f172a;
-  --muted:#64748b;
-  --accent:#2563eb;
-  --purple:#8b5cf6;
-  --border:#e2e8f0;
-  --grad:linear-gradient(135deg,var(--accent),var(--purple));
+:root {
+  --bg: #ffffff;
+  --soft: #f8fafc;
+  --text: #0f172a;
+  --muted: #64748b;
+  --accent: #2563eb;
+  --purple: #8b5cf6;
+  --border: #e2e8f0;
+  --grad: linear-gradient(135deg, #2563eb, #8b5cf6);
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08);
+  --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.1);
+  --shadow-lg: 0 20px 45px rgba(15, 23, 42, 0.12);
 }
 
-*{margin:0;padding:0;box-sizing:border-box}
-
-body{
-  font-family:Inter,sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  line-height:1.7;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.container{
-  max-width:1140px;
-  margin:auto;
-  padding:0 2rem;
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
 }
 
 /* NAV */
-nav{
-  position:sticky;
-  top:0;
-  background:rgba(255,255,255,.92);
-  backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--border);
-  z-index:100;
+nav {
+  position: sticky;
+  top: 0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  z-index: 100;
+  box-shadow: var(--shadow-sm);
 }
-.nav{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:.65rem 0;
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
 }
-.logo{
-  font-weight:900;
-  letter-spacing:-.02em;
+
+.logo {
+  font-weight: 900;
+  font-size: 1.1rem;
+  letter-spacing: -0.02em;
+  color: var(--text);
 }
-.nav a{
-  margin-left:2rem;
-  text-decoration:none;
-  color:var(--muted);
-  font-weight:600;
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
 }
-.nav a:hover{color:var(--accent)}
+
+.nav a {
+  text-decoration: none;
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: color 0.2s ease;
+  position: relative;
+}
+
+.nav a:hover {
+  color: var(--accent);
+}
+
+.nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  transition: width 0.3s ease;
+}
+
+.nav a:hover::after {
+  width: 100%;
+}
 
 /* HERO */
-header{
-  padding:4rem 0 4.5rem;
-  background:radial-gradient(circle at top right,#f1f5f9,#fff);
-  margin-bottom:3rem;
+header {
+  padding: 5rem 0 6rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+  position: relative;
+  overflow: hidden;
 }
 
-.hero{
-  display:flex;
-  gap:3rem;
-  align-items:center;
+header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.08) 0%, transparent 70%);
+  border-radius: 50%;
 }
 
-.hero-left{flex:1.3}
-.hero-right{flex:1;display:flex;justify-content:flex-end}
-
-.hero-photo-wrapper{
-  max-width:260px;
-  width:100%;
-  aspect-ratio:3/4;
-  border-radius:32px;
-  overflow:hidden;
-  border:1px solid var(--border);
-  box-shadow:0 20px 45px rgba(15,23,42,.15);
+.hero {
+  display: flex;
+  gap: 4rem;
+  align-items: center;
+  position: relative;
+  z-index: 1;
 }
-.hero-photo{
-  width:100%;
-  height:100%;
-  object-fit:cover;
+
+.hero-left {
+  flex: 1;
+}
+
+.hero-right {
+  flex: 0 0 280px;
+}
+
+.hero-photo-wrapper {
+  width: 280px;
+  height: 360px;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-lg);
+  position: relative;
+}
+
+.hero-photo-wrapper::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.1) 100%);
+}
+
+.hero-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* BADGES */
-.badges{
-  display:flex;
-  gap:.75rem;
-  flex-wrap:nowrap;
-  margin-bottom:1.6rem;
+.badges {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.75rem;
 }
-.badge{
-  display:inline-flex;
-  align-items:center;
-  gap:.55rem;
-  padding:10px 18px;
-  border-radius:999px;
-  border:2.5px solid var(--accent);
-  background:rgba(37,99,235,.04);
-  font-weight:800;
-  font-size:.82rem;
-  white-space:nowrap;
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  border: 1.5px solid var(--accent);
+  background: rgba(37, 99, 235, 0.06);
+  font-weight: 700;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  transition: all 0.3s ease;
 }
-.badge i{
-  color:var(--accent);
-  font-size:.9rem;
+
+.badge:hover {
+  background: rgba(37, 99, 235, 0.1);
+  transform: translateY(-2px);
+}
+
+.badge i {
+  color: var(--accent);
+  font-size: 0.85rem;
 }
 
 /* HERO TEXT */
-h1{
-  font-size:clamp(2.4rem,4.2vw,3.8rem);
-  font-weight:900;
-  line-height:1.1;
-}
-.grad{
-  background:var(--grad);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
+h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
 }
 
-.hero p{
-  max-width:650px;
-  margin-top:1.4rem;
-  color:var(--muted);
-  font-size:1.05rem;
+.grad {
+  background: var(--grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-.cta{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  margin-top:2.1rem;
-  padding:.9rem 2.2rem;
-  background:var(--grad);
-  color:#fff;
-  border-radius:16px;
-  text-decoration:none;
-  font-weight:700;
-  font-size:.95rem;
+.hero p {
+  max-width: 650px;
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+.hero p strong {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  padding: 1rem 2rem;
+  background: var(--grad);
+  color: #fff;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+  transition: all 0.3s ease;
+}
+
+.cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
 }
 
 /* SECTIONS */
-section{
-  padding:6rem 0;
-  margin-bottom:2rem;
+section {
+  padding: 5rem 0;
 }
 
-.center{
-  text-align:center;
-  margin-bottom:3.6rem;
+.center {
+  text-align: center;
+  margin-bottom: 3.5rem;
 }
-.center span{
-  font-size:.75rem;
-  letter-spacing:.25em;
-  font-weight:800;
-  color:var(--accent);
+
+.center span {
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  font-weight: 800;
+  color: var(--accent);
+  text-transform: uppercase;
 }
-.center h2{
-  font-size:2.5rem;
-  font-weight:900;
-  margin:.8rem 0 1rem;
+
+.center h2 {
+  font-size: 2.75rem;
+  font-weight: 900;
+  margin: 1rem 0;
+  letter-spacing: -0.02em;
 }
-.center p{
-  color:var(--muted);
-  max-width:520px;
-  margin:auto;
+
+.center p {
+  color: var(--muted);
+  font-size: 1.05rem;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 /* TABS */
-.tabs{
-  display:flex;
-  justify-content:center;
-  gap:.75rem;
-  margin-bottom:2.6rem;
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
 }
-.tab{
-  padding:8px 20px;
-  border-radius:999px;
-  border:1px solid var(--border);
-  background:#fff;
-  font-weight:700;
-  cursor:pointer;
-  color:var(--muted);
+
+.tab {
+  padding: 0.65rem 1.5rem;
+  border-radius: 999px;
+  border: 1.5px solid var(--border);
+  background: #fff;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: var(--muted);
+  transition: all 0.3s ease;
 }
-.tab.active{
-  background:var(--text);
-  color:#fff;
+
+.tab:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(37, 99, 235, 0.04);
+}
+
+.tab.active {
+  background: var(--text);
+  color: #fff;
+  border-color: var(--text);
 }
 
 /* CASES */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:2.6rem;
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+  gap: 2rem;
 }
-.case{
-  border:1px solid var(--border);
-  border-radius:24px;
-  overflow:hidden;
-  background:#fff;
-  transition:.3s;
+
+.case {
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  background: #fff;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-sm);
 }
-.case:hover{
-  transform:translateY(-6px);
-  border-color:var(--accent);
+
+.case:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--accent);
 }
-.case img{
-  width:100%;
-  height:220px;
-  object-fit:cover;
+
+.case img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  display: block;
 }
-.case-body{padding:1.9rem}
-.tag{
-  font-size:.7rem;
-  font-weight:800;
-  background:#ecfeff;
-  color:#0369a1;
-  padding:5px 12px;
-  border-radius:999px;
+
+.case-body {
+  padding: 2rem;
 }
-.case h3{margin:.9rem 0 .5rem;font-size:1.35rem}
-.case p{color:var(--muted);font-size:.95rem}
-.case a{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  margin-top:1.1rem;
-  font-weight:700;
-  color:var(--accent);
-  text-decoration:none;
+
+.tag {
+  font-size: 0.7rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #ecfeff, #cffafe);
+  color: #0369a1;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.case h3 {
+  margin: 1rem 0 0.75rem;
+  font-size: 1.4rem;
+  font-weight: 800;
+  line-height: 1.3;
+  color: var(--text);
+}
+
+.case p {
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.case a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--accent);
+  text-decoration: none;
+  transition: gap 0.3s ease;
+}
+
+.case a:hover {
+  gap: 0.75rem;
 }
 
 /* ACHIEVEMENTS */
-.achievements{
-  background:var(--soft);
-  border-radius:44px;
-  padding:5rem 3.5rem;
-  margin:3rem 0;
+.achievements {
+  background: var(--soft);
+  border-radius: 32px;
+  padding: 4rem 3rem;
+  margin: 3rem 0;
+  border: 1px solid var(--border);
 }
-.ach-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:2rem;
-  max-width:800px;
-  margin:auto;
+
+.ach-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
 }
-.ach{
-  background:#fff;
-  padding:1.9rem;
-  border-radius:22px;
-  border:1px solid var(--border);
+
+.ach {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-sm);
 }
-.ach h4{font-size:1.15rem;margin-bottom:.4rem}
+
+.ach:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent);
+}
+
+.ach h4 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin-bottom: 0.75rem;
+  color: var(--text);
+}
+
+.ach p {
+  font-size: 0.95rem;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.ach p strong {
+  color: var(--text);
+  font-weight: 700;
+}
+.ach-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: rgba(37, 99, 235, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem auto;
+}
+
+.ach-icon i {
+  font-size: 1.4rem;
+  color: var(--accent);
+}
+
+/* CTA BUTTON */
+.ach-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 1.1rem;
+  padding: 0.55rem 1.1rem;
+  border-radius: 999px;
+  background: var(--grad);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+.ach-btn i {
+  font-size: 0.8rem;
+}
+
+.ach-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.25);
+}
+
 
 /* CONTACT */
-.contact{
-  background:var(--soft);
-  border-radius:44px;
-  padding:5rem 3.5rem;
+.contact {
+  background: var(--soft);
+  border-radius: 32px;
+  padding: 4rem 3rem;
+  margin-top: 3rem;
+  border: 1px solid var(--border);
 }
-.social-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:1.6rem;
-  margin-top:3rem;
+
+.social-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 }
-.social-item{
-  background:#fff;
-  padding:1.8rem;
-  border-radius:24px;
-  border:1px solid var(--border);
-  text-decoration:none;
-  color:var(--text);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:.7rem;
-  font-weight:600;
+
+.social-item {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 16px;
+  border: 1.5px solid var(--border);
+  text-decoration: none;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-sm);
 }
-.social-item i{
-  font-size:1.4rem;
-  color:var(--accent);
+
+.social-item:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-md);
+  background: rgba(37, 99, 235, 0.02);
+}
+
+.social-item i {
+  font-size: 1.5rem;
+  color: var(--accent);
 }
 
 /* FOOTER */
-footer{
-  padding:2.2rem 0;
-  text-align:center;
-  color:var(--muted);
-  font-size:.85rem;
-  border-top:1px solid var(--border);
+footer {
+  padding: 2.5rem 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.9rem;
+  border-top: 1px solid var(--border);
+  margin-top: 3rem;
 }
 
 /* RESPONSIVE */
-@media(max-width:900px){
-  .hero{flex-direction:column-reverse}
-  .hero-right{justify-content:flex-start}
+@media(max-width: 1024px) {
+  .hero {
+    gap: 3rem;
+  }
+  
+  .hero-right {
+    flex: 0 0 240px;
+  }
+  
+  .hero-photo-wrapper {
+    width: 240px;
+    height: 310px;
+  }
+  
+  .grid {
+    grid-template-columns: 1fr;
+  }
 }
-@media(max-width:768px){
-  .grid,.ach-grid,.social-grid{grid-template-columns:1fr}
-  .badges{flex-wrap:wrap}
+
+@media(max-width: 768px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+  
+  .hero {
+    flex-direction: column-reverse;
+    text-align: center;
+    gap: 2.5rem;
+  }
+  
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .hero p {
+    max-width: 100%;
+  }
+  
+  .badges {
+    justify-content: center;
+  }
+  
+  .hero-right {
+    flex: 0 0 auto;
+  }
+  
+  .nav-links {
+    gap: 1.25rem;
+  }
+  
+  .nav a {
+    font-size: 0.85rem;
+  }
+  
+  h1 {
+    font-size: 2.25rem;
+  }
+  
+  .center h2 {
+    font-size: 2rem;
+  }
+  
+  section {
+    padding: 3.5rem 0;
+  }
+  
+  .achievements, .contact {
+    padding: 3rem 1.5rem;
+  }
+  
+  .ach-grid, .social-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media(max-width: 480px) {
+  .logo {
+    font-size: 0.95rem;
+  }
+  
+  .badge {
+    font-size: 0.75rem;
+    padding: 0.4rem 0.85rem;
+  }
+  
+  h1 {
+    font-size: 1.85rem;
+  }
+  
+  .hero p {
+    font-size: 0.95rem;
+  }
+  
+  .cta {
+    padding: 0.85rem 1.5rem;
+    font-size: 0.9rem;
+  }
 }
 </style>
 </head>
@@ -319,8 +638,9 @@ footer{
 <nav>
   <div class="container nav">
     <div class="logo">SHRUTIK ANNADATE</div>
-    <div>
+    <div class="nav-links">
       <a href="#work">Work</a>
+      <a href="#resume">Resume</a>
       <a href="#contact">Hire Me</a>
     </div>
   </div>
@@ -338,11 +658,11 @@ footer{
       <h1>Right Problems.<br><span class="grad">Scalable Solutions.</span></h1>
 
       <p>
-        A <strong>developer turned Product Manager</strong>, I specialize in identifying the right
-        problems, breaking ambiguity, and designing <strong>user-centric, data-driven solutions</strong>.
-        I thrive at the intersection of <strong>strategy, execution, and systems thinking</strong>.
+        A <strong>Developer-turned Product Manager</strong> who excels at identifying high-impact problems,
+        cutting through ambiguity, and building <strong>user-centric, data-driven products</strong>.
+        I operate at the intersection of <strong>strategy, execution, and systems thinking</strong>.
         <br><br>
-        <strong>Open to product and consulting roles.</strong>
+        <strong>Actively seeking Product Management and Management Consulting roles.</strong>
       </p>
 
       <a href="#work" class="cta">Explore My Work <i class="fa-solid fa-arrow-right"></i></a>
@@ -350,7 +670,7 @@ footer{
 
     <div class="hero-right">
       <div class="hero-photo-wrapper">
-        <img class="hero-photo" src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39" alt="Shrutik Annadate">
+        <img class="hero-photo" src="./Passport.jpeg" alt="Shrutik Annadate">
       </div>
     </div>
   </div>
@@ -358,45 +678,69 @@ footer{
 
 <section id="work" class="container">
   <div class="center">
-    <span>CASE STUDIES</span>
+    <span>Case Studies</span>
     <h2>Product Deep Dives</h2>
-    <p>How I approach problems, trade-offs, and outcomes.</p>
+    <p>PM interview-ready structured thinking.</p>
   </div>
 
   <div class="tabs">
-    <button class="tab active" data-cat="design">Product Design</button>
-    <button class="tab" data-cat="sense">Product Sense</button>
-    <button class="tab" data-cat="strategy">Strategy</button>
+    <button class="tab active" data-cat="teardown">Product Teardown</button>
+    <button class="tab" data-cat="design">Design</button>
+    <button class="tab" data-cat="dev">Development</button>
   </div>
 
   <div class="grid">
-    <div class="case" data-cat="design">
-      <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d">
+    <div class="case" data-cat="teardown">
+      <img src="./image.png" alt="Mutual Fund Analysis">
       <div class="case-body">
-        <span class="tag">System Design</span>
-        <h3>Payments Architecture</h3>
-        <p>Designing resilient payment flows for scale.</p>
-        <a href="#">Read Case →</a>
+        <span class="tag">Teardown</span>
+        <h3>Mutual Fund Conversion Improvement</h3>
+        <p>
+        A product teardown focused on low SIP
+         and lumpsum conversions, combining user research, 
+         market sizing, and competitive analysis.
+        </p>
+        <a href="#">Read Case <i class="fa-solid fa-arrow-right"></i></a>
       </div>
     </div>
 
-    <div class="case" data-cat="sense" style="display:none">
-      <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3">
+    <div class="case" data-cat="teardown">
+      <img src="./flipkart.png" alt="Flipkart Quick Commerce">
       <div class="case-body">
-        <span class="tag">Product Sense</span>
-        <h3>Auth-less Payments</h3>
-        <p>Balancing speed, trust, and security.</p>
-        <a href="#">Read Case →</a>
+        <span class="tag">Teardown</span>
+        <h3>Quick-Commerce - Flipkart's minute</h3>
+        <p>
+        Synthesized learnings from India's quick-commerce leaders 
+        to evaluate how Flipkart can strengthen its fast-delivery proposition
+        </p>
+        <a href="./flipkart.pdf">Read Case <i class="fa-solid fa-arrow-right"></i></a>
       </div>
     </div>
 
-    <div class="case" data-cat="strategy" style="display:none">
-      <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71">
+    <div class="case" data-cat="design" style="display:none">
+      <img src="./flipkart.png" alt="Food Delivery Design">
       <div class="case-body">
-        <span class="tag">Strategy</span>
-        <h3>Resource Allocation</h3>
-        <p>Driving utilization with data.</p>
-        <a href="#">Read Case →</a>
+        <span class="tag">Design</span>
+        <h3>Home Cooked Food Delivery</h3>
+        <p>
+        Designed a home-cooked food delivery experience using Figma,
+        focusing on user flows, trust cues, and seamless ordering to
+        improve adoption and retention.
+        </p>
+        <a href="https://www.figma.com/design/yn55uQclTcAP0OrUEX7B1i/Leyzar?node-id=0-1&p=f" target="_blank">View Design <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </div>
+
+    <div class="case" data-cat="dev" style="display:none">
+      <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71" alt="Course Aggregator">
+      <div class="case-body">
+        <span class="tag">Development</span>
+        <h3>Course Aggregator</h3>
+        <p>Created a course aggregator using Node.js and Python that
+           compares 3,000+ courses across 5+ platforms. Implemented a web 
+           crawler to scrape and standardize course data, simplifying course
+            discovery and comparison.</p>
+        <a href="https://github.com/shrutik27/coursemug" target="_blank">View Code <i class="fa-solid fa-arrow-right"></i></a>
       </div>
     </div>
   </div>
@@ -405,19 +749,74 @@ footer{
 <section class="container">
   <div class="achievements">
     <div class="center">
-      <span>ACHIEVEMENTS</span>
-      <h2>Beyond Work</h2>
+      <span>Achievements</span>
+      <h2>Leadership & Impact</h2>
+      <p>Beyond roles — measurable impact and consistency.</p>
     </div>
 
     <div class="ach-grid">
-      <div class="ach">
-        <h4>Football</h4>
-        <p>College-level representation building leadership and resilience.</p>
-      </div>
-      <div class="ach">
-        <h4>Instagram · @simpcoder</h4>
-        <p>350K+ impressions sharing product & CAT insights.</p>
-      </div>
+
+   <div class="ach">
+  <div class="ach-icon">
+    <i class="fa-brands fa-instagram"></i>
+  </div>
+
+  <h4>Content & Community</h4>
+
+  <p>
+    Generated <strong>350K+ impressions</strong> by sharing structured insights on
+    <strong>Product Management</strong> and <strong>CAT preparation</strong>,
+    building an engaged learner community.
+  </p>
+
+  <a href="https://www.instagram.com/simpcoder/"
+     target="_blank"
+     rel="noopener noreferrer"
+     class="ach-btn">
+    View on Instagram
+    <i class="fa-solid fa-arrow-right"></i>
+  </a>
+</div>
+
+<div class="ach">
+  <div class="ach-icon">
+    <i class="fa-solid fa-futbol"></i>
+  </div>
+
+  <h4>Competitive Football</h4>
+
+  <p>
+    District-level <strong>Runner-up</strong> among <strong>50+ teams</strong>;
+    represented at college level and continue to actively play competitive football.
+  </p>
+</div>
+
+<div class="ach">
+  <div class="ach-icon">
+    <i class="fa-solid fa-users-gear"></i>
+  </div>
+
+  <h4>Secretary — Product Club</h4>
+
+  <p>
+    Led initiatives, events, and peer learning as
+    <strong>Secretary of the Product Club, IIT Kanpur</strong>,
+    fostering structured product thinking.
+  </p>
+</div>
+
+  </div>
+</section>
+
+<section id="resume" class="container">
+  <div class="contact">
+    <div class="center">
+      <span>Resume</span>
+      <h2>Download My Resume</h2>
+      <p>Detailed experience, impact, and skills.</p>
+      <a href="./Resume.pdf" class="cta" download>
+        Download Resume <i class="fa-solid fa-download"></i>
+      </a>
     </div>
   </div>
 </section>
@@ -425,9 +824,9 @@ footer{
 <section id="contact" class="container">
   <div class="contact">
     <div class="center">
-      <span>HIRE ME</span>
+      <span>Hire Me</span>
       <h2>Opportunity or Product Discussion?</h2>
-      <p>If you’re hiring or want to discuss a product problem, let’s connect.</p>
+      <p>If you're hiring or want to discuss a product problem, let's connect.</p>
     </div>
 
     <div class="social-grid">
@@ -437,32 +836,35 @@ footer{
       <a class="social-item" href="https://linkedin.com/in/shrutik23" target="_blank">
         <i class="fa-brands fa-linkedin"></i>LinkedIn
       </a>
-      <a class="social-item" href="https://instagram.com/simpcoder" target="_blank">
-        <i class="fa-brands fa-instagram"></i>Instagram
+      <a class="social-item" href="https://wa.me/918529736006" target="_blank">
+        <i class="fa-brands fa-whatsapp"></i>WhatsApp
       </a>
     </div>
   </div>
 </section>
 
 <footer>
-  <p id="copyright"></p>
+  <div class="container">
+    <p id="copyright"></p>
+  </div>
 </footer>
 
 <script>
-document.getElementById("copyright").innerText =
-  "© " + new Date().getFullYear() + " Shrutik Annadate";
+document.getElementById("copyright").innerText = "© " + new Date().getFullYear() + " Shrutik Annadate. All rights reserved.";
 
-const tabs=document.querySelectorAll(".tab");
-const cases=document.querySelectorAll(".case");
+const tabs = document.querySelectorAll(".tab");
+const cases = document.querySelectorAll(".case");
 
-tabs.forEach(tab=>{
-  tab.onclick=()=>{
-    tabs.forEach(t=>t.classList.remove("active"));
+tabs.forEach(tab => {
+  tab.addEventListener("click", () => {
+    tabs.forEach(t => t.classList.remove("active"));
     tab.classList.add("active");
-    cases.forEach(c=>{
-      c.style.display=c.dataset.cat===tab.dataset.cat?"block":"none";
+    
+    const category = tab.dataset.cat;
+    cases.forEach(c => {
+      c.style.display = c.dataset.cat === category ? "block" : "none";
     });
-  };
+  });
 });
 </script>
 
